@@ -2,8 +2,25 @@ package cli
 
 import (
 	"errors"
+	"fmt"
+	"reflect"
 	"strconv"
 )
+
+type Options interface{}
+
+func AnalyzeOptions(options Options) {
+	t := reflect.TypeOf(options)
+	for idx := 0; idx < t.NumField(); idx++ {
+		field := t.Field(idx)
+		val, ok := field.Tag.Lookup("short")
+		if ok {
+			fmt.Printf("short = %v\n", val)
+		}
+	}
+}
+
+//////////////////////
 
 type Option interface {
 	SetDefaultValue(map[string]interface{})

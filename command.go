@@ -19,6 +19,7 @@ type Command struct {
 	ArgsUsage   string
 	Description string
 	Options     []Option
+	Options_    Options
 	Commands    []*Command
 	Action      func(*Context) error
 
